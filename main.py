@@ -13,7 +13,7 @@ user_profile = users[users["UserID"] == user_id].iloc[0]
 recommended = recommend_destinations(user_profile, destinations)
 
 for i, dest in enumerate(recommended):
-    dest["Day"] = (i % 3) + 1  # Cycles through 1, 2, 3
+    dest["Day"] = (i % 3) + 1
 
 itinerary = generate_itinerary(user_profile, recommended)
 

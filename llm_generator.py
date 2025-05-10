@@ -73,4 +73,4 @@ def ask_transport_mode():
         "2": "Rental Car",
         "3": "Taxi or Rideshare"
     }
-    return transport_options.get(choice, "Public Transport")  # Default to Public if invalid input
+    return transport_options.get(choice, "Public Transport")

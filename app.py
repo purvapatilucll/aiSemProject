@@ -11,7 +11,6 @@ load_dotenv()
 PEXELS_API_KEY = os.getenv("PEXELS_API_KEY")
 PEXELS_API_URL = os.getenv("PEXELS_API_URL")
 
-# Load data
 users = pd.read_csv("data/users.csv")
 destinations = pd.read_csv("data/destinations.csv", encoding='latin1')
 
@@ -19,21 +18,17 @@ st.set_page_config(page_title="AI Travel Itinerary Recommender", layout="centere
 
 st.title("✈️ AI Travel Itinerary Recommender")
 
-# User profile selection
 user_ids = users["UserID"].tolist()
 selected_user_id = st.selectbox("Choose a User ID", user_ids)
 
-# Get the selected user
 user_profile = users[users["UserID"] == selected_user_id].iloc[0]
 
-# Show user info
 with st.expander("🔍 View Selected User Profile"):
     st.json(user_profile.to_dict())
 
-# Recommend destinations
 recommended = recommend_destinations(user_profile, destinations)
 
-# Function to fetch image from Pexels
+
 def fetch_pexels_image(query):
     headers = {
         'Authorization': PEXELS_API_KEY
