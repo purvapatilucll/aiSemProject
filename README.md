@@ -17,7 +17,6 @@ It uses **Sentence Transformers** for semantic recommendation, **LLMs (Large Lan
 1. **streamlit**: Web framework for building the interactive user interface.
 2. **pandas**: For managing data, such as user profiles and destination information.
 3. **requests**: For making HTTP requests to external APIs (like Pexels API to fetch destination images).
-4. **folium**: For rendering interactive maps on the web app.
 5. **sentence-transformers**: For generating sentence embeddings and calculating semantic similarity between user profiles and destinations.
 6. **openai**: To connect to OpenAI's GPT model for itinerary generation.
 
@@ -25,9 +24,18 @@ It uses **Sentence Transformers** for semantic recommendation, **LLMs (Large Lan
 
 ## Github Repository
 
-`git clone https://github.com/purvapatilucll/aiSemProject.git`
+https://github.com/purvapatilucll/aiSemProject
 
-To run the app `streamlit run app.py`
+```
+# Clone the repository
+git clone https://github.com/purvapatilucll/aiSemProject.git
+
+# Navigate into the project directory
+cd aiSemProject
+
+# Run the Streamlit app
+streamlit run app.py
+```
 
 
 
@@ -84,8 +92,8 @@ This dataset represents user profiles with behavioral and demographic traits.
 ## Core Modules
 
 ### 1. recommender.py
-- **Model**: Uses [`sentence-transformers` ➔ `all-MiniLM-L6-v2`] to embed user profile text and destination descriptions.
-- **Similarity Calculation**: Measures cosine similarity between the user's embedding and destination embeddings.
+- **Model**: Uses [`sentence-transformers` -> `all-MiniLM-L6-v2`] to embed user profile text and destination descriptions.
+- **Similarity Calculation**: Measures similarity between the user's embedding and destination embeddings.
 - **Top Matches**: Returns the top 3 most semantically similar destinations.
 
 ### 2. llm_generator.py
@@ -106,8 +114,8 @@ This dataset represents user profiles with behavioral and demographic traits.
 - **Framework**: Streamlit
 - **User Interface**:
   - User ID selection (`selectbox`)
-  - Dynamic user profile preview (`st.expander`)
-  - Destination recommendation cards (with **real images** from Pexels API (NOTE: pictures doesn't fully work as expected))
+  - User profile preview (`st.expander`)
+  - Destination recommendation (with **real images** from Pexels API (NOTE: pictures doesn't fully work as expected))
   - Radio button (`st.radio`) for selecting Travel Mode (Car / Public Transport)
 - **Itinerary Generation**:
   - Button ("Generate My Travel Itinerary") triggers LLM with travel mode passed as parameter.
@@ -127,40 +135,10 @@ This dataset represents user profiles with behavioral and demographic traits.
 
 ## Key Workflow
 
-1. **User selects their ID** ➔
-2. **Top 3 matching destinations** are recommended ➔
-3. **Real images** shown for each destination (it is not that efficient)➔
-4. **User selects travel mode** (Car/Public Transport) ➔
+1. **User selects their ID**
+2. **Top 3 matching destinations** are recommended
+3. **Real images** shown for each destination (it is not that efficient)
+4. **User selects travel mode** (Car/Public Transport)
 5. **Itinerary generated** with transport-specific advice and personalized trip plans.
 
 
-## Thinking Behind the System Design
-
-- **Why sentence-transformers?**  
-  → To semantically match *user interests* with *destination vibes* without relying on rigid categories.
-  
-- **Why a large language model for itinerary?**  
-  → Instead of hardcoding trip plans, LLMs flexibly generate realistic, detailed itineraries tailored to each traveler and destination.
-
-- **Why travel mode input?**  
-  → Travelers using cars need a very different experience (routes, parking, road trips) compared to public transport users (stations, local buses/trains).  
-  Adding this makes the itinerary much more *realistic and useful*.
-
-- **Why Streamlit?**  
-  → Easy to rapidly build, deploy, and to display the functionality in a neat way.
-
-
-## Future Build-up
-
-In the future the app may have,
-
-1. **Interactive Maps**:
-   - I would integrate interactive maps to visually represent recommended destinations. Users could explore destinations by clicking on map markers to see more information, such as nearby points of interest, hotels, and routes.
-
-2. **Chat Box for More Information**:
-   - A built-in chat feature will be added where users can interact with a virtual assistant to get more information about their travel itinerary or destinations. This will allow users to ask specific questions (e.g., "What's the weather in Paris?") and receive responses.
-
-3. **Feedback Section**:
-   - A feedback system will be introduced where users can rate their experience with the recommended destinations and itineraries. This will help improve the recommendation algorithm and provide valuable insights into user preferences for further enhancement.
-
-These features will aim to improve user interaction, provide more detailed travel support.
